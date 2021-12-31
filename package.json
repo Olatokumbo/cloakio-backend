@@ -1,0 +1,27 @@
+{
+  "name": "cloakio-backend",
+  "version": "1.0.0",
+  "description": "The Cloakio backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node-dev --respawn src/index",
+    "dev": "nodmon --exec ts-node src/index"
+  },
+  "author": "David Faith Odesola",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.5",
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
+  }
+}
