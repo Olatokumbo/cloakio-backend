@@ -1,6 +1,7 @@
 import express, { Response, Request } from "express";
 import mongooseConnectionDB from "./config/database";
-// import admin from "./config/firebase";
+import cors from "cors";
+import User from "./routes/user";
 import auth from "./middlewares/auth";
 require("dotenv").config();
 
@@ -10,10 +11,14 @@ const app = express();
 // Connecting to MongoDB
 mongooseConnectionDB(process.env.MONGODB_URI!);
 
+//Enabled cors fro all routes
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/", auth, (_req: Request, res: Response) => {
+app.use("/user", auth, User);
+
+app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
     response: "Hello from Cloakio's Official Server",
   });
