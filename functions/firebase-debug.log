@@ -1,28 +1,32 @@
-[debug] [2022-01-07T20:35:48.545Z] ----------------------------------------------------------------------
-[debug] [2022-01-07T20:35:48.548Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\faith\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
-[debug] [2022-01-07T20:35:48.548Z] CLI Version:   10.0.1
-[debug] [2022-01-07T20:35:48.548Z] Platform:      win32
-[debug] [2022-01-07T20:35:48.549Z] Node Version:  v14.16.0
-[debug] [2022-01-07T20:35:48.556Z] Time:          Fri Jan 07 2022 20:35:48 GMT+0000 (Greenwich Mean Time)
-[debug] [2022-01-07T20:35:48.556Z] ----------------------------------------------------------------------
+[debug] [2022-01-07T21:49:48.678Z] ----------------------------------------------------------------------
+[debug] [2022-01-07T21:49:48.681Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\faith\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2022-01-07T21:49:48.682Z] CLI Version:   10.0.1
+[debug] [2022-01-07T21:49:48.682Z] Platform:      win32
+[debug] [2022-01-07T21:49:48.682Z] Node Version:  v14.16.0
+[debug] [2022-01-07T21:49:48.684Z] Time:          Fri Jan 07 2022 21:49:48 GMT+0000 (Greenwich Mean Time)
+[debug] [2022-01-07T21:49:48.684Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2022-01-07T20:35:48.559Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2022-01-07T20:35:48.676Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"type"}
-[debug] [2022-01-07T20:35:48.685Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2022-01-07T20:35:48.686Z] > authorizing via signed-in user (faithodesola@gmail.com)
-[debug] [2022-01-07T20:35:48.686Z] [iam] checking project cloakio for permissions ["firebase.projects.get"]
-[debug] [2022-01-07T20:35:48.688Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2022-01-07T20:35:48.689Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2022-01-07T20:35:48.864Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Fri, 07 Jan 2022 20:35:49 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2022-01-07T20:35:48.877Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/cloakio:testIamPermissions  
- {"permissions":["firebase.projects.get"]}
-[debug] [2022-01-07T20:35:49.142Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2022-01-07T20:35:49.142Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[debug] [2022-01-07T20:35:49.665Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 07 Jan 2022 20:35:50 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=555","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2022-01-07T20:35:49.670Z] >>> HTTP REQUEST GET http://localhost:4400/emulators  
- 
-[debug] [2022-01-07T20:35:49.820Z] Error: connect ECONNREFUSED 127.0.0.1:4400
-    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1146:16)
-[error] 
-[error] Error: Server Error. connect ECONNREFUSED 127.0.0.1:4400
+[debug] [2022-01-07T21:49:48.765Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-01-07T21:49:48.766Z] > authorizing via signed-in user (faithodesola@gmail.com)
+[info] i  emulators: Starting emulators: auth, functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions"}}
+[debug] [2022-01-07T21:49:48.799Z] [hub] writing locator at C:\Users\faith\AppData\Local\Temp\hub-cloakio.json
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mfirestore, database, hosting, pubsub, storage\u001b[22m"}}
+[warn] !  Your requested "node" version "16" doesn't match your global version "14" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"16\" doesn't match your global version \"14\""}}
+[debug] [2022-01-07T21:49:48.849Z] defaultcredentials: writing to file C:\Users\faith\AppData\Roaming\firebase\faithodesola_gmail_com_application_default_credentials.json
+[debug] [2022-01-07T21:49:48.852Z] Setting GAC to C:\Users\faith\AppData\Roaming\firebase\faithodesola_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\faith\\AppData\\Roaming\\firebase\\faithodesola_gmail_com_application_default_credentials.json"}}
+[debug] [2022-01-07T21:49:48.855Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/cloakio/adminSdkConfig [none]
+[debug] [2022-01-07T21:49:49.151Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/cloakio/adminSdkConfig 200
+[debug] [2022-01-07T21:49:49.152Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/cloakio/adminSdkConfig {"projectId":"cloakio","storageBucket":"cloakio.appspot.com"}
+[warn] !  ui: Emulator UI unable to start on port 4000, starting on 4001 instead. {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI unable to start on port 4000, starting on 4001 instead."}}
+[debug] [2022-01-07T21:49:54.345Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-01-07T21:49:54.346Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-01-07T21:49:54.347Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\faith\\.cache\\firebase\\emulators\\ui-v1.6.4\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\faith\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.6.4\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-01-07T21:49:54.610Z] Web / API server started at localhost:4001
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4001\n"}}
+[info] i  functions: Watching "C:\Users\faith\Documents\Projects\cloakio-backend\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\faith\\Documents\\Projects\\cloakio-backend\\functions\" for Cloud Functions..."}}
+[debug] [2022-01-07T21:49:54.648Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2022-01-07T21:49:54.649Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2022-01-07T21:49:54.649Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2022-01-07T21:49:54.650Z] [worker-~diagnostic~-035a8663-15f0-49ec-9333-b18a2003ac0e]: Assigning socketPath: \\?\pipe\C:\Users\faith\Documents\Projects\cloakio-backend\functions\17956 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-035a8663-15f0-49ec-9333-b18a2003ac0e]: Assigning socketPath: \\\\?\\pipe\\C:\\Users\\faith\\Documents\\Projects\\cloakio-backend\\functions\\17956"}}
+[debug] [2022-01-07T21:49:54.650Z] [worker-~diagnostic~-035a8663-15f0-49ec-9333-b18a2003ac0e]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-035a8663-15f0-49ec-9333-b18a2003ac0e]: BUSY"}}
