@@ -1,11 +1,8 @@
 import * as functions from "firebase-functions";
 import axios from "axios";
 import generateToken from "./helper/generateTokens";
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
 
-export const newUser = functions.auth.user().onCreate((user) => {
-  console.log(user);
+export const addNewUser = functions.auth.user().onCreate((user) => {
   axios
     .post(
       "http://localhost:8000/user/new",
