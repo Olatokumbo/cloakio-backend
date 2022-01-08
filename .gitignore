@@ -3,3 +3,7 @@ node_modules
 dist
 
 firebase-service-account.json
+
+# Firebase logs
+firebase-debug.log
+ui-debug.log
