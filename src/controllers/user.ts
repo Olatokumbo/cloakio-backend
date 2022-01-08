@@ -17,7 +17,7 @@ const newUser = (req: Request, res: Response) => {
       return res.status(200).json(user);
     })
     .catch((err) => {
-      throw new Error(err);
+      return res.status(400).json(err.message);
     });
 };
 

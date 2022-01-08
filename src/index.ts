@@ -2,6 +2,7 @@ import express, { Response, Request } from "express";
 import mongooseConnectionDB from "./config/database";
 import cors from "cors";
 import User from "./routes/user";
+import Poster from "./routes/poster";
 import auth from "./middlewares/auth";
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/user", User);
+app.use("/poster", Poster);
 
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
@@ -24,7 +26,7 @@ app.get("/", (_req: Request, res: Response) => {
   });
 });
 
-app.get("/secret",auth, (_req: Request, res: Response) => {
+app.get("/secret", auth, (_req: Request, res: Response) => {
   res.status(200).json({
     response: "Cloakio's Secret Stuff",
   });
