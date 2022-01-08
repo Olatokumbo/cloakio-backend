@@ -1,8 +1,6 @@
 import admin from "../config/firebase";
 
-const uid = "Cloakio-Admin";
-
-const generateToken = () => {
+const generateToken = (uid: string) => {
   return admin.auth().createCustomToken(uid);
 };
 

@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/user", auth, User);
+app.use("/user", User);
 
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
