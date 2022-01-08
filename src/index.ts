@@ -24,6 +24,12 @@ app.get("/", (_req: Request, res: Response) => {
   });
 });
 
+app.get("/secret",auth, (_req: Request, res: Response) => {
+  res.status(200).json({
+    response: "Cloakio's Secret Stuff",
+  });
+});
+
 app.listen(PORT, () => {
   console.log("Listening at PORT", PORT);
 });
