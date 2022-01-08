@@ -14,7 +14,10 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
   admin
     .auth()
     .verifyIdToken(token)
-    .then(() => next())
+    .then((data) => {
+      (req as any).user = (data as any).uid;
+      next();
+    })
     .catch(() => res.status(403).json({ message: "Could not authorize" }));
 };
 

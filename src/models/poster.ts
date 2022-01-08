@@ -19,9 +19,12 @@ const PosterSchema = new mongoose.Schema({
       "health",
     ],
     default: "technology",
-    required: true
+    required: true,
   },
-
+  posterURLs: {
+    type: [String],
+    required: false,
+  },
 });
 
 export default mongoose.model("Poster", PosterSchema);
