@@ -1,4 +1,5 @@
 import S3 from "aws-sdk/clients/s3";
+import random from "randomstring";
 require("dotenv").config();
 
 const bucketName = process.env.AWS_BUCKET_NAME!;
@@ -16,12 +17,11 @@ const client = new S3({
 
 const uploadFiles = (files) => {
   const promises: Promise<any>[] = [];
-
   files.map((item) => {
     const uploadParams = {
       Bucket: bucketName,
-      Body: JSON.stringify(item),
-      Key: item.filename,
+      Body: item.buffer,
+      Key: random.generate(),
       ContentType: item.mimetype,
     };
 
@@ -30,7 +30,6 @@ const uploadFiles = (files) => {
 
   return Promise.all(promises);
 };
-
 
 // downloads a file from s3
 const getFileStream = (fileKey) => {
@@ -47,4 +46,15 @@ const getFileStream = (fileKey) => {
     });
 };
 
-export { bucketName, uploadFiles, getFileStream };
+const getSignedUrl = (key) => {
+  const signedUrlExpireSeconds = 60 * 5;
+
+  const url = client.getSignedUrl("getObject", {
+    Bucket: bucketName,
+    Key: key,
+    Expires: signedUrlExpireSeconds,
+  });
+  return url;
+};
+
+export { bucketName, uploadFiles, getFileStream, getSignedUrl };

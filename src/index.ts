@@ -6,7 +6,7 @@ import Poster from "./routes/poster";
 import auth from "./middlewares/auth";
 require("dotenv").config();
 
-const PORT: number | string = process.env.PORT || 8000;
+const PORT: number | string = process.env.PORT || 9000;
 const app = express();
 
 // Connecting to MongoDB
@@ -14,7 +14,7 @@ mongooseConnectionDB(process.env.MONGODB_URI!);
 
 //Enabled cors fro all routes
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/user", User);
@@ -30,6 +30,10 @@ app.get("/secret", auth, (_req: Request, res: Response) => {
   res.status(200).json({
     response: "Cloakio's Secret Stuff",
   });
+});
+
+app.get("*", (req, res) => {
+  res.status(400).json({ message: "Invalid API request" });
 });
 
 app.listen(PORT, () => {
