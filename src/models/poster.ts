@@ -21,7 +21,7 @@ const PosterSchema = new mongoose.Schema({
     default: "technology",
     required: true,
   },
-  posterURLs: {
+  posterKeys: {
     type: [String],
     required: false,
   },

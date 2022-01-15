@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { CallbackError } from "mongoose";
-import { getFileStream, getSignedUrl, uploadFiles } from "../config/s3";
+import { getSignedUrl, uploadFiles, deleteFiles } from "../config/s3";
 
 import Poster from "../models/poster";
 
-const posters = (req: Request, res: Response) => {
+const posters = (_req: Request, res: Response) => {
   Poster.find((err: any, posters: any) => {
     if (!err) return res.status(200).json(posters);
   });
@@ -22,7 +22,7 @@ const uploads = async (req: Request, res: Response) => {
       category,
       userId,
       // userId: (req as any).userId,
-      posterURLs: keys,
+      posterKeys: keys,
       date: new Date(),
     });
 
@@ -41,14 +41,18 @@ const posterById = (req: Request, res: Response) => {
   });
 };
 
+const deletePoster = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const poster = await Poster.findByIdAndDelete(id);
+    await deleteFiles(poster.posterKeys);
+    return res.status(200).json(poster);
+  } catch (err) {
+    res.status(401).json({ error: err.message });
+  }
+};
+
 const posterImage = (req, res) => {
-  // try {
-  //   getSignedUrl(req.params.key)
-  //   const readStream = getFileStream(req.params.key);
-  //   readStream.pipe(res);
-  // } catch (error) {
-  //   console.log(error);
-  // }
   const url = getSignedUrl(req.params.key);
 
   try {
@@ -57,4 +61,4 @@ const posterImage = (req, res) => {
     console.log(error);
   }
 };
-export { posters, posterById, uploads, posterImage };
+export { posters, posterById, uploads, posterImage, deletePoster };

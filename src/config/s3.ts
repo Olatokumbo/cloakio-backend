@@ -15,6 +15,12 @@ const client = new S3({
   },
 });
 
+/**
+ * Uploads S3 Objects
+ * @param files
+ * @returns Promise
+ */
+
 const uploadFiles = (files) => {
   const promises: Promise<any>[] = [];
   files.map((item) => {
@@ -31,7 +37,25 @@ const uploadFiles = (files) => {
   return Promise.all(promises);
 };
 
-// downloads a file from s3
+/**
+ * Deletes S3 Objects
+ * @param files Array of Object Keys
+ * @returns Promise
+ */
+const deleteFiles = (keys: string[]) => {
+  const promises: Promise<any>[] = [];
+  keys.map((item) => {
+    const deleteParams = {
+      Bucket: bucketName,
+      Key: item,
+    };
+
+    promises.push(client.deleteObject(deleteParams).promise());
+  });
+
+  return Promise.all(promises);
+};
+
 const getFileStream = (fileKey) => {
   const downloadParams = {
     Key: fileKey,
@@ -46,6 +70,11 @@ const getFileStream = (fileKey) => {
     });
 };
 
+/**
+ * Generate the SignedURL for an Object
+ * @param Object key
+ * @returns url SignedURL
+ */
 const getSignedUrl = (key) => {
   const signedUrlExpireSeconds = 60 * 5;
 
@@ -57,4 +86,4 @@ const getSignedUrl = (key) => {
   return url;
 };
 
-export { bucketName, uploadFiles, getFileStream, getSignedUrl };
+export { bucketName, uploadFiles, getFileStream, getSignedUrl, deleteFiles };
