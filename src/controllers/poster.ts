@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CallbackError } from "mongoose";
 import { getSignedUrl, uploadFiles, deleteFiles } from "../config/s3";
 
-import Poster from "../models/poster";
+import Poster, { PosterDocument } from "../models/poster";
 
 const posters = (_req: Request, res: Response) => {
   Poster.find((err: any, posters: any) => {
@@ -11,22 +11,22 @@ const posters = (_req: Request, res: Response) => {
 };
 
 const uploads = async (req: Request, res: Response) => {
-  const { title, description, category, userId } = req.body;
+  const { title, description, category, userId, price } = req.body;
   try {
     let photos = await uploadFiles(req.files);
-    console.log(photos);
     let keys = await photos.map((item) => item.key);
     const newPoster = new Poster({
       title,
       description,
       category,
       userId,
+      price,
       // userId: (req as any).userId,
       posterKeys: keys,
       date: new Date(),
     });
 
-    const poster = await newPoster.save();
+    const poster: PosterDocument = await newPoster.save();
     return res.status(200).json(poster);
   } catch (err) {
     res.status(401).json({ error: err.message });
@@ -36,7 +36,7 @@ const uploads = async (req: Request, res: Response) => {
 const posterById = (req: Request, res: Response) => {
   const { id } = req.params;
 
-  Poster.findById(id, (err: CallbackError, poster) => {
+  Poster.findById(id, (err: CallbackError, poster: PosterDocument) => {
     if (!err) return res.status(200).json(poster);
   });
 };
@@ -44,8 +44,29 @@ const posterById = (req: Request, res: Response) => {
 const deletePoster = async (req, res) => {
   const { id } = req.params;
   try {
-    const poster = await Poster.findByIdAndDelete(id);
-    await deleteFiles(poster.posterKeys);
+    const poster: PosterDocument | null = await Poster.findByIdAndDelete(id);
+    if (poster) await deleteFiles(poster.posterKeys);
+
+    return res.status(200).json(poster);
+  } catch (err) {
+    res.status(401).json({ error: err.message });
+  }
+};
+
+const updatePoster = async (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  try {
+    const poster = await Poster.findByIdAndUpdate(
+      id,
+      {
+        ...body,
+      },
+      {
+        new: true
+      }
+    );
+
     return res.status(200).json(poster);
   } catch (err) {
     res.status(401).json({ error: err.message });
@@ -61,4 +82,11 @@ const posterImage = (req, res) => {
     console.log(error);
   }
 };
-export { posters, posterById, uploads, posterImage, deletePoster };
+export {
+  posters,
+  posterById,
+  uploads,
+  posterImage,
+  deletePoster,
+  updatePoster,
+};

@@ -1,4 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
+
+export interface UserDocument extends Document {
+  displayName: string;
+  email: string;
+  joined: string;
+  phoneNumber?: number;
+  description: string;
+  photoURL: string;
+}
 
 const User = new mongoose.Schema({
   _id: { type: String, required: true },
@@ -7,7 +16,11 @@ const User = new mongoose.Schema({
   joined: { type: Date, required: true },
   phoneNumber: { type: Number, required: false },
   description: { type: String, required: false, default: "" },
-  photoURL: { type: String, required: false },
+  photoURL: {
+    type: String,
+    required: false,
+    default: "https://via.placeholder.com/150",
+  },
 });
 
-export default mongoose.model("User", User);
+export default mongoose.model<UserDocument>("User", User);

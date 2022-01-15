@@ -4,6 +4,7 @@ const mongooseConnectionDB = (uri: string) => {
   mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 
   let db = mongoose.connection;
