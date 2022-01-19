@@ -8,7 +8,10 @@ const cache = async (req: Request, res: Response, next: NextFunction) => {
   const redis = await redisConnection(process.env.REDIS_URL!);
 
   redis.get(id, (error, result) => {
-    if (error) throw error;
+    if (error) {
+      console.log(error);
+      return next();
+    }
     if (result !== null) {
       return res.json(JSON.parse(result));
     } else {
