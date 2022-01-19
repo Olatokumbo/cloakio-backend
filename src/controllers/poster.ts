@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { CallbackError } from "mongoose";
 import { getSignedUrl, uploadFiles, deleteFiles } from "../config/s3";
+import redisConnection from "../config/redis";
+require("dotenv").config();
 
 import Poster, { PosterDocument } from "../models/poster";
 
@@ -36,8 +38,13 @@ const uploads = async (req: Request, res: Response) => {
 const posterById = (req: Request, res: Response) => {
   const { id } = req.params;
 
-  Poster.findById(id, (err: CallbackError, poster: PosterDocument) => {
-    if (!err) return res.status(200).json(poster);
+  Poster.findById(id, async (err: CallbackError, poster: PosterDocument) => {
+    if (!err) {
+      const redis = await redisConnection(process.env.REDIS_URL!);
+
+      redis.set(id, JSON.stringify(poster), "ex", 15);
+      return res.status(200).json(poster);
+    }
   });
 };
 
@@ -63,7 +70,7 @@ const updatePoster = async (req, res) => {
         ...body,
       },
       {
-        new: true
+        new: true,
       }
     );
 

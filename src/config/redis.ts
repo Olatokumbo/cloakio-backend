@@ -1,14 +1,13 @@
-import { createClient } from "redis";
+import Redis from "ioredis";
+
 
 const redisConnection = async (url?: any) => {
-  const client = url ? createClient({ url }) : createClient();
+  const redis = url ? new Redis(url): new Redis();
 
-  client.on("error", (err) => console.log("Redis Client Error", err));
-  client.on("ready", () => console.log("Cache Ready"));
+  redis.on("error", (err) => console.log("Redis Client Error", err));
+  redis.on("ready", () => console.log("Cache Ready"));
 
-  await client.connect();
-
-  return client;
+  return redis;
 };
 
 export default redisConnection;

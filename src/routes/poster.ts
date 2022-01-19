@@ -10,13 +10,14 @@ import {
 import { storage, filefilter } from "../config/multer";
 
 import multer from "multer";
+import cache from "../middlewares/cache";
 
 const router = express.Router();
 
 const upload = multer({ storage: storage, fileFilter: filefilter });
 
 router.get("/all", posters);
-router.get("/:id", posterById);
+router.get("/:id", cache, posterById);
 router.post("/upload", upload.array("posters", 10), uploads);
 router.delete("/:id/delete", deletePoster);
 router.patch("/:id/update", updatePoster);

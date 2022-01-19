@@ -28,7 +28,8 @@ app.use(express.json());
 app.use("/user", User);
 app.use("/poster", Poster);
 
-app.get("/", (_req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
+  console.log(req.headers);
   res.status(200).json({
     response: "Hello from Cloakio's Official Server",
   });
