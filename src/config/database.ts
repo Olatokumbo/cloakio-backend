@@ -8,11 +8,8 @@ const mongooseConnectionDB = (uri: string) => {
   });
 
   let db = mongoose.connection;
-  db.on("error", console.error.bind(console, "connection error:"));
-  db.once("open", function () {
-    // we're connected!
-    console.log("Connected to DB");
-  });
+  db.on("error", (err) => console.log("connection error:", err));
+  db.once("open", () => console.log("Database Ready"));
 };
 
 export default mongooseConnectionDB;

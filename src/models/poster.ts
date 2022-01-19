@@ -7,7 +7,7 @@ export interface PosterDocument extends Document {
   date: string;
   category: string;
   posterKeys: string[];
-  price: string;
+  price: Number;
 }
 
 const PosterSchema = new mongoose.Schema({
@@ -15,7 +15,7 @@ const PosterSchema = new mongoose.Schema({
   description: { type: String, required: true },
   userId: { type: String, required: true },
   date: { type: Date, required: true },
-  price: { type: String, required: true },
+  price: { type: Number, required: true },
   category: {
     type: String,
     enum: [
