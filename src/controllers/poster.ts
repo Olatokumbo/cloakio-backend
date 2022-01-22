@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import { CallbackError } from "mongoose";
 import { getSignedUrl, uploadFiles, deleteFiles } from "../config/s3";
 import redisConnection from "../config/redis";
-require("dotenv").config();
-
 import Poster, { PosterDocument } from "../models/poster";
+import index from "../config/algolia";
+require("dotenv").config();
 
 const posters = (_req: Request, res: Response) => {
   Poster.find((err: any, posters: any) => {
@@ -29,6 +29,8 @@ const uploads = async (req: Request, res: Response) => {
     });
 
     const poster: PosterDocument = await newPoster.save();
+    await index.saveObject({ objectID: poster._id, ...poster.toObject() });
+
     return res.status(200).json(poster);
   } catch (err) {
     res.status(401).json({ error: err.message });
@@ -52,7 +54,10 @@ const deletePoster = async (req, res) => {
   const { id } = req.params;
   try {
     const poster: PosterDocument | null = await Poster.findByIdAndDelete(id);
-    if (poster) await deleteFiles(poster.posterKeys);
+    if (poster) {
+      await deleteFiles(poster.posterKeys);
+      await index.deleteObject(poster._id);
+    }
 
     return res.status(200).json(poster);
   } catch (err) {
@@ -73,6 +78,13 @@ const updatePoster = async (req, res) => {
         new: true,
       }
     );
+
+    if (poster) {
+      await index.partialUpdateObject({
+        objectID: poster._id,
+        ...poster.toObject(),
+      });
+    }
 
     return res.status(200).json(poster);
   } catch (err) {

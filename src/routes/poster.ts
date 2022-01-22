@@ -22,9 +22,9 @@ const redis = redisConnection(process.env.REDIS_URL!);
 
 router.get("/all", posters);
 router.get("/:id", cache(redis), posterById);
-router.post("/upload", upload.array("posters", 10), uploads);
-router.delete("/:id/delete", deletePoster);
-router.patch("/:id/update", updatePoster);
+router.post("/upload", upload.array("images", 10), uploads);
+router.delete("/:id", deletePoster);
+router.patch("/:id", updatePoster);
 router.get("/image/:key", posterImage);
 
 export default router;
