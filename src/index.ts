@@ -18,7 +18,7 @@ mongooseConnectionDB(process.env.MONGODB_URI!);
 // redisConnection(process.env.REDIS_URL!, process.env.REDIS_PASSWORD!);
 
 //Initialize Redis cache
-redisConnection(process.env.REDIS_URL!);
+// redisConnection(process.env.REDIS_URL!);
 
 //Enabled cors fro all routes
 app.use(cors());

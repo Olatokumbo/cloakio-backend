@@ -41,8 +41,8 @@ const posterById = (req: Request, res: Response) => {
   Poster.findById(id, async (err: CallbackError, poster: PosterDocument) => {
     if (!err) {
       const redis = await redisConnection(process.env.REDIS_URL!);
-
       redis.set(id, JSON.stringify(poster), "ex", 15);
+      redis.quit();
       return res.status(200).json(poster);
     }
   });

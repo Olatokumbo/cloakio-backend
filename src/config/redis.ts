@@ -1,7 +1,6 @@
 import Redis from "ioredis";
 
-
-const redisConnection = async (url?: any) => {
+const redisConnection = (url?: any) => {
   const redis = url ? new Redis(url): new Redis();
 
   redis.on("error", (err) => console.log("Redis Client Error", err));
