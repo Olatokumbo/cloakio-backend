@@ -41,13 +41,25 @@ const posterById = (req: Request, res: Response) => {
   const { id } = req.params;
 
   Poster.findById(id, async (err: CallbackError, poster: PosterDocument) => {
-    if (!err) {
+    if (poster && !err) {
       const redis = await redisConnection(process.env.REDIS_URL!);
       redis.set(id, JSON.stringify(poster), "ex", 15);
       redis.quit();
       return res.status(200).json(poster);
     }
+    return res.status(404).json({ message: "Poster not Found" });
   });
+};
+
+const postersByCategory = async (req: Request, res: Response) => {
+  let category: string = req.query.category as any;
+
+  const posters: PosterDocument[]=
+    await Poster.find({
+      category,
+    });
+
+  return res.status(200).json(posters);
 };
 
 const deletePoster = async (req, res) => {
@@ -104,6 +116,7 @@ const posterImage = (req, res) => {
 export {
   posters,
   posterById,
+  postersByCategory,
   uploads,
   posterImage,
   deletePoster,

@@ -6,7 +6,7 @@ import Poster from "./routes/poster";
 import auth from "./middlewares/auth";
 require("dotenv").config();
 
-const PORT: number | string = process.env.PORT || 9000;
+const PORT: number | string = process.env.PORT || 8000;
 
 const app = express();
 

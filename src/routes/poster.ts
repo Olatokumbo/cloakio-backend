@@ -6,6 +6,7 @@ import {
   posterImage,
   deletePoster,
   updatePoster,
+  postersByCategory,
 } from "../controllers/poster";
 import { storage, filefilter } from "../config/multer";
 
@@ -22,6 +23,7 @@ const redis = redisConnection(process.env.REDIS_URL!);
 
 router.get("/all", posters);
 router.get("/:id", cache(redis), posterById);
+router.get("/", postersByCategory);
 router.post("/upload", upload.array("images", 10), uploads);
 router.delete("/:id", deletePoster);
 router.patch("/:id", updatePoster);
