@@ -5,12 +5,12 @@ import axios from "axios";
 export const newUser = functions.auth.user().onCreate((user) => {
   // return generateToken(user.uid).then((token) => {
   //   console.log(token);
+  functions.logger.info(user);
   return axios
     .post(
       "https://cloakio.herokuapp.com/user/new",
       {
         ...user,
-        displayName: user.email?.split("@")[0],
       }
       // {
       //   headers: { Authorization: `Bearer ${token}` },
@@ -20,7 +20,6 @@ export const newUser = functions.auth.user().onCreate((user) => {
       functions.logger.debug(response.data);
     })
     .catch((err) => {
-      functions.logger.info(user);
       functions.logger.error(err.message);
     });
   // });

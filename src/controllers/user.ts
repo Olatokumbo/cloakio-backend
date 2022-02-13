@@ -5,9 +5,9 @@ const newUser = (req: Request, res: Response) => {
   const { uid, displayName, email, photoURL, phoneNumber } = req.body;
   const newUser = new User({
     _id: uid,
-    displayName,
+    displayName: displayName ?? email.split("@")[0],
     email,
-    photoURL,
+    photoURL: photoURL ?? "https://via.placeholder.com/150",
     phoneNumber,
     joined: new Date(),
   });
@@ -17,7 +17,7 @@ const newUser = (req: Request, res: Response) => {
       return res.status(200).json(user);
     })
     .catch((err) => {
-      return res.status(400).json(err);
+      return res.status(400).json({ error: err.message });
     });
 };
 
